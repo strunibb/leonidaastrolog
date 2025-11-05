@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Леонида — Ведическая астрология</title>
+  <meta name="description" content="Консультации по ведической астрологии: разбор натальной карты и личные рекомендации." />
+  <meta name="theme-color" content="#1c2140" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Леонида">
+  <meta property="og:title" content="Леонида — Ведическая астрология">
+  <meta property="og:description" content="Разбор натальной карты и персональные рекомендации.">
+  <meta property="og:image" content="/png/leonida1.jpg">
+  <meta property="og:url" content="https://leonida.example/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://leonida.example/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap"></noscript>
+
+  <!-- Icons / PWA -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <!-- Preloads -->
+  <link rel="preload" as="image" href="/png/leonida1.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
+  <link rel="preload" as="image" href="/png/leonida2.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
+  <link rel="preload" as="image" href="/логотип_белый.png">
+
+  <style>
+    :root{
+      --bg: linear-gradient(135deg,#161b2b 0%,#23235b 55%,#344e9e 100%);
+      --panel: rgba(38,41,69,.92);
+      --glass: rgba(255,255,255,.07);
+      --line: #ffffff22;
+      --white:#fff;
+      --a1:#42d6ff; --a2:#b399ff;
+      --btn: linear-gradient(90deg,#42d6ff 0%,#b399ff 100%);
+      --btn2: linear-gradient(90deg,#b399ff 0%,#42d6ff 100%);
+      --rad:18px; --shadow:0 8px 30px rgba(0,0,0,.18);
+      --max:1120px; --header-h:68px;
+      --gl1:#42d6ff; --gl2:#b399ff; --gl3:#8ad9ff;
+
+      /* фото: замените файлы в /png/ */
+      --hero-img:  url('/png/leonida1.jpg'); /* первый раздел фото */
+      --about-img: url('/png/leonida2.jpg');  /* второй раздел фото */
+
+      --font-display:"Bebas Neue","Oswald",system-ui,Arial,sans-serif;
+      --font-text:"Oswald","Bebas Neue",system-ui,Arial,sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--white);font-family:var(--font-text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
+    section{scroll-margin-top:calc(var(--header-h) + 16px)}
+
+    /* progress + header */
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--a1);width:0;z-index:60;box-shadow:0 0 12px #42d6ffaa}
+    header{position:sticky;top:0;z-index:30;height:var(--header-h);display:flex;align-items:center;background:rgba(25,27,55,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #ffffff12}
+    .head-inner{display:flex;align-items:center;justify-content:space-between;width:100%;gap:14px;padding:10px 5vw}
+    .logo-img{height:46px;background:#fff;border-radius:14px;padding:2px 8px;box-shadow:0 0 18px #42d6ff38;object-fit:contain}
+    nav{display:flex;gap:1.1rem;flex-wrap:wrap}
+    nav a{font-weight:700;opacity:.95;position:relative;padding:6px 0}
+    nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--a2);transition:width .2s}
+    nav a:hover{color:var(--a1);text-shadow:0 0 10px #42d6ff66}
+    nav a:hover::after{width:100%}
+    .burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid #ffffff22;border-radius:10px;background:#ffffff12}
+    .burger span{width:18px;height:2px;background:#fff;border-radius:2px;transition:.2s}
+    @media (max-width:900px){
+      .burger{display:flex}
+      nav{position:absolute;left:0;right:0;top:var(--header-h);background:rgba(23,25,55,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:12px 5vw;display:none;flex-direction:column;border-bottom:1px solid #ffffff12}
+      nav.show{display:flex}
+      .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .burger.active span:nth-child(2){opacity:0}
+      .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative;min-height:clamp(560px,82vh,920px);
+      display:grid;align-items:center;justify-items:start;overflow:hidden;
+      background-image:
+        linear-gradient(90deg,rgba(12,15,45,.88) 0%,rgba(12,15,45,.72) 36%,rgba(12,15,45,.28) 56%,rgba(12,15,45,0) 76%),
+        var(--hero-img);
+      background-size:cover;background-position:right center;text-align:left;
+      isolation:isolate;
+    }
+    .hero::after{
+      content:"";position:absolute;left:0;right:0;bottom:-1px;height:160px;z-index:0;pointer-events:none;
+      background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.75) 70%, rgba(12,15,45,1) 100%);
+    }
+    .hero-inner{position:relative;z-index:1;width:min(900px,92vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;padding:clamp(84px,10vw,120px) 18px 42px}
+    .hero h1{margin:0 0 10px;font-size:clamp(42px,10vw,110px);font-weight:800;font-family:var(--font-display);letter-spacing:.02em;line-height:.95;text-transform:uppercase;color:#fff;text-shadow:0 0 6px var(--gl3),0 0 14px var(--gl1),0 0 28px var(--gl1),0 0 48px var(--gl2)}
+    .hero-title span{display:block}
+    .hero p{margin:12px 0 0;max-width:820px;font-size:clamp(18px,2.6vw,28px);line-height:1.3}
+    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:16px;padding:14px 20px;color:#fff;font-weight:800;box-shadow:0 8px 22px #42d6ff2a,0 0 30px #42d6ff22 inset;transition:transform .16s,background .18s,box-shadow .18s}
+    .cta:hover{transform:translateY(-2px);background:var(--btn2)}
+    .cta--ghost{background:transparent;border:1px solid #ffffff55;border-radius:14px;padding:12px 18px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start;margin-top:18px}
+
+    /* ===== Плавные секции ===== */
+    .section-bg{
+      --bg-img:none; position:relative; overflow:hidden; background-color:#0c0f2d;
+      background-image:linear-gradient(180deg, rgba(12,15,45,.85) 0%, rgba(12,15,45,.92) 40%, rgba(12,15,45,.88) 100%), var(--bg-img);
+      background-size:cover;background-position:center;background-repeat:no-repeat;
+      isolation:isolate;
+    }
+    .section-bg::before{content:""; position:absolute; left:0; right:0; top:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to top, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
+    .section-bg::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
+
+    .bg-services  {--bg-img:url('/png/bg-abonements.png')}
+    .bg-reviews   {--bg-img:url('/png/bg-reviews.png')}
+    .bg-results   {--bg-img:url('/png/bg-results.png')}
+    .bg-contacts  {--bg-img:url('/png/bg-contacts.png')}
+
+    /* ===== ОБ АСТРОЛОГЕ ===== */
+    .about-hero{
+      position:relative;overflow:hidden;isolation:isolate;
+      min-height:clamp(520px,74vh,860px);
+      background-image:
+        linear-gradient(90deg, rgba(12,15,45,.88) 0%, rgba(12,15,45,.60) 40%, rgba(12,15,45,0) 76%),
+        var(--about-img);
+      background-size:cover;
+      background-position:right center;
+    }
+    .about-hero__photo{display:none}
+    .about-hero::after{
+      content:"";position:absolute;left:0;right:0;bottom:-1px;height:150px;pointer-events:none;z-index:1;
+      background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.78) 70%, rgba(12,15,45,1) 100%);
+    }
+    .about-hero__overlay{position:absolute;inset:0;display:grid;align-items:center;justify-items:start;z-index:2}
+    .about-hero__card{
+      width:min(760px,92vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;
+      background:rgba(22,26,54,.72);border:1px solid #ffffff33;border-radius:20px;
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      box-shadow:0 14px 38px #00000050, 0 0 60px #42d6ff22 inset;
+      padding:clamp(14px,2.2vw,24px) clamp(16px,3vw,28px);
+      color:#f4f7ff;text-align:center;text-shadow:0 1px 12px rgba(0,0,0,.65);
+    }
+    .about-hero__card h2{margin:0 0 10px}
+    .about-hero__card p{margin:0;line-height:1.25;font-size:clamp(18px,2.2vw,28px)}
+    @media (max-width:900px){
+      .about-hero{background-position:72% center}
+      .about-hero__overlay{align-items:flex-start}
+      .about-hero__card{width:calc(100% - 24px);margin:10vw auto 0 12px;border-radius:16px;padding:14px 14px 16px}
+    }
+
+    /* Карточки и прочее */
+    .block{max-width:var(--max);margin:36px auto;padding:34px 18px;background:var(--panel);border-radius:var(--rad);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center;position:relative;z-index:1}
+    .block h2,.block h3{font-family:var(--font-display);letter-spacing:.02em;text-transform:uppercase;font-size:clamp(28px,5vw,44px);margin:0 0 14px;background:linear-gradient(90deg,#42d6ff 0%,#b399ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px #42d6ff42, 0 0 20px #b399ff35}
+    .meta{color:#9edcff;font-size:16px;font-weight:700;margin-bottom:8px;text-shadow:0 0 8px #42d6ff70}
+    .caption{margin-top:10px;color:var(--a2);font-weight:700;text-shadow:0 0 8px #b399ff66}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:14px}
+    .card{background:var(--glass);border:1.3px solid var(--line);border-radius:18px;box-shadow:0 8px 24px #00000018;padding:16px 16px 18px;text-align:left;transition:transform .18s, box-shadow .2s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 42px #00000028}
+    .card h3{margin:0 0 6px;font-size:22px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.02em}
+    .sub{opacity:.9;margin-bottom:8px}
+    .card ul{margin:8px 0 10px 0;padding-left:0;list-style:none}
+    .card li{margin:6px 0}
+    .price-line{display:grid;grid-template-columns:1fr auto;column-gap:10px;align-items:baseline;white-space:nowrap;overflow:hidden}
+    .price-line .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .price-line .price{white-space:nowrap}
+    .card-img{width:100%;height:auto;margin-top:12px;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 22px #00000022}
+
+    .notice{margin-top:16px;padding:12px 14px;border-radius:12px;background:rgba(66,214,255,.08);border:1px solid #42d6ff33;color:#cfefff;font-weight:700;text-align:center;box-shadow:0 6px 18px #00000018 inset}
+
+    .more-btn{margin-top:8px;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #9edcff66;color:#e9f6ff;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;transition:.18s}
+    .more-btn:hover{transform:translateY(-1px);background:#ffffff12}
+    .desc{margin-top:12px;padding:14px;border-radius:14px;background:linear-gradient(180deg, rgba(66,214,255,.10), rgba(179,153,255,.10));border:1px solid #8ecbff33;box-shadow:0 8px 28px #00000022 inset, 0 0 30px #42d6ff15;display:none}
+    .desc.show{display:block}
+    [hidden]{display:none !important;}
+    .desc .ribbon{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#42d6ff,#b399ff);color:#0e1438;box-shadow:0 6px 20px #42d6ff55;margin-bottom:8px}
+    .desc p{margin:6px 0 8px;line-height:1.35}
+    .desc ul{margin:8px 0 8px 0;padding:0 0 0 20px}
+    .desc li{margin:6px 0}
+    .desc small{display:block;color:#bcdcff;opacity:.95;margin-top:6px}
+
+    .videowrap{max-width:860px;margin:28px auto 8px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 10px 30px #00000022}
+    .video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
+    .video-frame video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
+
+    .block--full{max-width:none;width:100vw;margin-left:50%;transform:translateX(-50%);border-radius:0}
+    .reviews-slider{position:relative;margin-top:16px}
+    .reviews-viewport{-webkit-mask-image:linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);mask-image:linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);overflow:hidden}
+    .reviews-track{display:flex;gap:18px;align-items:center;padding:10px 8vw;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .review-slide{flex:0 0 60vw;max-width:740px;height:clamp(360px, 56vh, 560px);background:var(--glass);border:1.3px solid var(--line);border-radius:16px;padding:10px;box-shadow:0 8px 24px #00000030;opacity:.75;transform:scale(.96);transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease;display:flex;align-items:center;justify-content:center}
+    .review-slide.is-active{opacity:1;transform:scale(.985);box-shadow:0 16px 46px #00000045}
+    .review-slide img{width:100%;height:100%;object-fit:contain;border-radius:12px;display:block;background:#0b0f2c}
+    .reviews-arrow{position:absolute;top:50%;transform:translateY(calc(-50%));width:48px;height:48px;border-radius:999px;border:1px solid #ffffff77;background:#0f1437a6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 28px #000a;z-index:3}
+    .reviews-arrow:hover{transform:translateY(calc(-50%)) scale(1.05)}
+    .reviews-arrow svg{width:20px;height:20px;fill:#fff}
+    .reviews-arrow[data-prev]{left:10px}
+    .reviews-arrow[data-next]{right:10px}
+    @media (max-width:720px){
+      .reviews-track{padding:8px 5vw}
+      .review-slide{flex:0 0 86vw;height:clamp(320px, 52vh, 520px)}
+      .reviews-arrow{width:56px;height:56px}
+      .reviews-arrow svg{width:22px;height:22px}
+    }
+
+    .btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:14px;padding:12px 16px;color:#fff;font-weight:800;box-shadow:0 8px 22px #42d6ff2a,0 0 30px #42d6ff22 inset;transition:transform .16s,background .18s,box-shadow .18s}
+    .btn:hover{transform:translateY(-2px);background:var(--btn2)}
+    .btn--ghost{background:transparent;border:1px solid #ffffff55}
+    footer{margin-top:40px;padding:calc(24px + env(safe-area-inset-bottom,0)) 5vw 24px;background:rgba(25,27,55,.85);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);border-top:1px solid #ffffff12}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .fsocial{display:flex;gap:10px}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)}
+    .reveal.show{opacity:1;transform:none}
+
+    .sticky-cta{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0));z-index:50;display:none;justify-content:center;align-items:center;padding:14px 18px;border-radius:999px;background:var(--btn);color:#fff;font-weight:800;text-align:center;box-shadow:0 12px 36px #00000044, 0 0 36px #42d6ff55 inset;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+    .sticky-cta.show{display:flex}
+    @media (min-width:901px){.sticky-cta{display:none !important}}
+    :focus-visible{outline:3px solid #42d6ff;outline-offset:3px;border-radius:10px}
+  </style>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Леонида","jobTitle":"Ведический астролог","url":"https://leonida.example/","sameAs":["https://t.me/astroleonida","https://t.me/leonidochka83"],"image":"/png/leonida1.jpg"}
+  </script>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<header>
+  <div class="head-inner container">
+    <img src="логотип_белый.png" alt="Логотип «Леонида»" class="logo-img" width="128" height="46" fetchpriority="high" decoding="async">
+    <nav id="topNav" aria-label="Навигация по сайту">
+      <a href="#about">Обо мне</a>
+      <a href="#services">Услуги</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#results">Результаты</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner container">
+    <h1 class="hero-title">
+      <span>ЛЕОНИДА</span>
+      <span>ВЕДИЧЕСКАЯ АСТРОЛОГИЯ</span>
+    </h1>
+    <p>Индивидуальные разборы и консультации. Помогаю увидеть сильные стороны, выбрать вектор действий и принять важные решения на основе вашей натальной карты.</p>
+
+    <div class="cta-row">
+      <a href="https://t.me/astroleonida" class="cta cta--main" target="_blank" rel="noopener" data-keep-utm="true">Записаться на консультацию</a>
+      <a href="https://t.me/leonidochka83" class="cta cta--ghost" target="_blank" rel="noopener" data-keep-utm="true">@leonidochka83</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-hero section-bg reveal" aria-label="Об астрологе">
+  <div class="about-hero__photo" aria-hidden="true"></div>
+  <div class="about-hero__overlay">
+    <div class="about-hero__card">
+      <h2>Обо мне</h2>
+      <p>
+        Я — Леонида, практикующий ведический астролог. Мои консультации — это ясные рекомендации без воды,
+        чтобы вы могли уверенно действовать в карьере, отношениях и личном развитии.
+        <br>«Хочешь получить инструкцию к своей лучшей жизни? Тогда тебе ко мне».
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section-bg bg-services reveal">
+  <div class="container">
+    <div class="block" style="background:rgba(20,22,48,.86)">
+      <h2>Услуги и стоимость</h2>
+
+      <div class="cards">
+        <div class="card">
+          <div class="meta">Главная консультация</div>
+          <h3>🔮 Разбор натальной карты</h3>
+          <div class="sub">Личная встреча онлайн (до 80 минут) + рекомендации и ответы на ваши вопросы</div>
+          <ul>
+            <li class="price-line"><span class="label">Стоимость</span><span class="price"><b>7 990₽</b></span></li>
+          </ul>
+          <button class="more-btn" type="button" data-toggle="#desc-natal" aria-controls="desc-natal" aria-expanded="false">Подробнее об услуге</button>
+          <div class="desc" id="desc-natal" aria-label="Описание услуги" hidden>
+            <span class="ribbon">Что входит</span>
+            <ul>
+              <li>Подготовка карты по дате, времени и месту рождения</li>
+              <li>Разбор ключевых сфер: предназначение, сильные и слабые стороны, финансы, отношения</li>
+              <li>Рекомендации по периодам и ближайшим возможностям</li>
+              <li>Ответы на ваши вопросы в конце встречи</li>
+              <li>Запись консультации и конспект основных выводов</li>
+            </ul>
+            <small>Связь для записи: <a href="https://t.me/astroleonida" target="_blank" rel="noopener">t.me/astroleonida</a> или <a href="https://t.me/leonidochka83" target="_blank" rel="noopener">@leonidochka83</a>.</small>
+          </div>
+        </div>
+
+        <!-- Плейсхолдеры для будущих услуг -->
+        <div class="card" aria-disabled="true">
+          <div class="meta">Скоро</div>
+          <h3>💞 Синастрия (совместимость)</h3>
+          <div class="sub">Добавим после подтверждения</div>
+        </div>
+        <div class="card" aria-disabled="true">
+          <div class="meta">Скоро</div>
+          <h3>🗓 Прогноз на период</h3>
+          <div class="sub">Добавим после подтверждения</div>
+        </div>
+      </div>
+
+      <div class="cta-row" style="margin-top:22px;">
+        <a href="https://t.me/astroleonida" class="cta cta--main" target="_blank" rel="noopener" data-keep-utm="true">Записаться</a>
+        <a href="https://t.me/leonidochka83" class="cta cta--ghost" target="_blank" rel="noopener" data-keep-utm="true">Написать в Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section-bg bg-reviews reveal">
+  <div class="container">
+    <div class="block block--full" style="background:rgba(20,22,48,.86)">
+      <h2>Отзывы клиентов</h2>
+
+      <div class="reviews-slider" id="reviewsSlider" aria-label="Слайдер отзывов">
+        <button class="reviews-arrow" data-prev aria-label="Предыдущий отзыв">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="reviews-viewport">
+          <div class="reviews-track">
+            <div class="review-slide is-active"><img src="/png/reviews/1.png" alt="Отзыв 1" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="/png/reviews/2.png" alt="Отзыв 2" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="/png/reviews/3.png" alt="Отзыв 3" loading="lazy" decoding="async"></div>
+          </div>
+        </div>
+
+        <button class="reviews-arrow" data-next aria-label="Следующий отзыв">
+          <svg viewBox="0 0 24 24"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="section-bg bg-results reveal">
+  <div class="container">
+    <div class="block" style="background:rgba(20,22,48,.86)">
+      <h2>Результаты и кейсы</h2>
+      <figure class="videowrap">
+        <div class="video-frame">
+          <video id="resultsVideo" src="video.mp4" controls playsinline preload="metadata" poster="логотип_белый.png"></video>
+        </div>
+        <figcaption class="caption">Истории клиентов: инсайты и изменения после консультаций</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="section-bg bg-contacts reveal">
+  <div class="container">
+    <div class="block" style="background:rgba(20,22,48,.86)">
+      <h2>Контакты</h2>
+      <div class="btn-row" style="margin-bottom:10px;">
+        <a class="btn" href="https://t.me/astroleonida" target="_blank" rel="noopener" data-keep-utm="true">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="" style="width:20px;height:20px;filter:invert(1);">
+          Telegram-канал
+        </a>
+        <a class="btn" href="https://t.me/leonidochka83" target="_blank" rel="noopener" data-keep-utm="true">
+          Написать @leonidochka83
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot">
+    <div>© 2025 Леонида. Ведическая астрология</div>
+    <div class="fsocial">
+      <a href="https://t.me/astroleonida" target="_blank" rel="noopener">TG-канал</a>
+      <a href="https://t.me/leonidochka83" target="_blank" rel="noopener">TG-аккаунт</a>
+    </div>
+  </div>
+</footer>
+
+<a class="sticky-cta" id="stickyCta" href="https://t.me/astroleonida" target="_blank" rel="noopener" data-keep-utm="true">Записаться на консультацию</a>
+
+<script>
+  // Нав и бургер
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('topNav');
+  burger.setAttribute('aria-expanded','false');
+  burger.addEventListener('click',()=>{
+    burger.classList.toggle('active'); nav.classList.toggle('show');
+    burger.setAttribute('aria-expanded', String(burger.classList.contains('active')));
+  });
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('show'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
+  }));
+
+  // Reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Sticky CTA
+  const scta = document.getElementById('stickyCta'); let sShown=false;
+  window.addEventListener('scroll',()=>{ if(!sShown && scrollY>240){ scta.classList.add('show'); sShown=true; } }, {passive:true});
+
+  // Прогресс-бар
+  const progressBar = document.getElementById('scrollProgress');
+  function onScrollProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progressBar.style.width = (scrolled * 100) + '%';
+  }
+  document.addEventListener('scroll', onScrollProgress, {passive:true}); onScrollProgress();
+
+  // Слайдер отзывов
+  (function(){
+    const slider = document.getElementById('reviewsSlider'); if(!slider) return;
+    const track = slider.querySelector('.reviews-track');
+    const viewport = slider.querySelector('.reviews-viewport');
+    const slides = Array.from(track.children);
+    let index = 0;
+
+    function setActive(i){ slides.forEach((s,idx)=> s.classList.toggle('is-active', idx===i)); }
+    function update(){
+      const slide = slides[index]; if(!slide) return;
+      const left = slide.offsetLeft + slide.offsetWidth/2;
+      const center = viewport.clientWidth/2;
+      const translate = center - left;
+      track.style.transform = `translateX(${translate}px)`;
+      setActive(index);
+    }
+    function prev(){ index = (index-1+slides.length)%slides.length; update(); }
+    function next(){ index = (index+1)%slides.length; update(); }
+
+    slider.querySelector('[data-prev]').addEventListener('click', prev);
+    slider.querySelector('[data-next]').addEventListener('click', next);
+
+    // свайп
+    let startX=0, dx=0, touching=false;
+    viewport.addEventListener('pointerdown', (e)=>{ touching=true; startX=e.clientX; viewport.setPointerCapture(e.pointerId); });
+    viewport.addEventListener('pointerup', ()=>{ if(!touching) return; touching=false; if(Math.abs(dx)>40){ dx>0 ? prev() : next(); } dx=0; });
+    viewport.addEventListener('pointermove', (e)=>{ if(!touching) return; dx=e.clientX-startX; });
+
+    window.addEventListener('resize', update, {passive:true});
+    requestAnimationFrame(update);
+  })();
+
+  // UTM сохранение
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','yclid','gclid','fbclid'];
+    let found=false, store={}; keys.forEach(k=>{ const v=params.get(k); if(v){store[k]=v; found=true;} });
+    if(found) localStorage.setItem('utmParams', JSON.stringify(store));
+    function withUtm(url){
+      try{ const st=localStorage.getItem('utmParams'); if(!st) return url;
+        const obj=JSON.parse(st); const u=new URL(url, location.origin);
+        keys.forEach(k=>{ if(obj[k] && !u.searchParams.has(k)) u.searchParams.set(k,obj[k]); });
+        return u.toString();
+      }catch(e){ return url; }
+    }
+    document.querySelectorAll('[data-keep-utm]').forEach(a=>{
+      const href=a.getAttribute('href'); if(!href || href.startsWith('#') || href.startsWith('mailto:')) return;
+      a.setAttribute('href', withUtm(href));
+    });
+  })();
+
+  // Тогглер описаний (надёжная версия с делегированием и hidden)
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.more-btn');
+    if(!btn) return;
+    const sel = btn.dataset.toggle || ('#' + (btn.getAttribute('aria-controls') || ''));
+    const target = sel ? document.querySelector(sel) : null;
+    if(!target) return;
+
+    const willOpen = target.hasAttribute('hidden');
+    target.toggleAttribute('hidden');
+    target.classList.toggle('show', willOpen);
+
+    btn.setAttribute('aria-expanded', String(willOpen));
+    btn.textContent = willOpen ? 'Скрыть описание' : 'Подробнее об услуге';
+
+    if (willOpen) {
+      target.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+  });
+</script>
+</body>
+</html>
