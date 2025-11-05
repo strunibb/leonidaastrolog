@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Леонида — Ведическая астрология</title>
   <meta name="description" content="Консультации по ведической астрологии: разбор натальной карты и личные рекомендации." />
-  <meta name="theme-color" content="#1c2140" />
+  <meta name="theme-color" content="#2a2140" />
   <meta name="format-detection" content="telephone=no" />
 
   <!-- Open Graph -->
@@ -13,18 +13,21 @@
   <meta property="og:site_name" content="Леонида">
   <meta property="og:title" content="Леонида — Ведическая астрология">
   <meta property="og:description" content="Разбор натальной карты и персональные рекомендации.">
-  <!-- После публикации можно заменить на абсолютный URL страницы -->
   <meta property="og:image" content="png/leonida1.jpg">
   <meta property="og:url" content="./">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="./">
 
-  <!-- Fonts -->
+  <!-- Fonts (более «мягкая» пара) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;800&display=swap"></noscript>
+
+  <!-- Icons / PWA -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <!-- Preloads -->
   <link rel="preload" as="image" href="png/leonida1.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
@@ -33,24 +36,31 @@
 
   <style>
     :root{
-      --bg: linear-gradient(135deg,#161b2b 0%,#23235b 55%,#344e9e 100%);
-      --panel: rgba(38,41,69,.92);
-      --glass: rgba(255,255,255,.07);
+      /* Уютный градиент */
+      --bg: linear-gradient(135deg,#221a35 0%,#3a285f 54%,#6a4e9d 100%);
+      --panel: rgba(40,35,70,.9);
+      --glass: rgba(255,255,255,.06);
       --line: #ffffff22;
       --white:#fff;
-      --a1:#42d6ff; --a2:#b399ff;
-      --btn: linear-gradient(90deg,#42d6ff 0%,#b399ff 100%);
-      --btn2: linear-gradient(90deg,#b399ff 0%,#42d6ff 100%);
-      --rad:18px; --shadow:0 8px 30px rgba(0,0,0,.18);
+
+      /* Нежные акценты */
+      --a1:#ffb0d6; --a2:#9ec8ff;
+      --btn: linear-gradient(90deg,#9ec8ff 0%,#ffb0d6 100%);
+      --btn2: linear-gradient(90deg,#ffb0d6 0%,#9ec8ff 100%);
+      --rad:18px; --shadow:0 6px 20px rgba(0,0,0,.15);
       --max:1120px; --header-h:68px;
-      --gl1:#42d6ff; --gl2:#b399ff; --gl3:#8ad9ff;
 
-      /* фото: берём из /png внутри репозитория (без ведущего слэша!) */
-      --hero-img:  url('png/leonida1.jpg'); /* первый раздел фото (leonida1) */
-      --about-img: url('png/leonida2.jpg');  /* второй раздел фото (leonida2) */
+      /* Фото: НЕ ставим ведущий / чтобы работало на GitHub Pages */
+      --hero-img:  url('png/leonida1.jpg');
+      --about-img: url('png/leonida2.jpg');
 
-      --font-display:"Bebas Neue","Oswald",system-ui,Arial,sans-serif;
-      --font-text:"Oswald","Bebas Neue",system-ui,Arial,sans-serif;
+      /* Фокус изображения (чтобы лицо не обрезало). Можно регулировать числами ниже */
+      --hero-pos: 78% center;
+      --about-pos: 78% center;
+
+      /* Шрифты */
+      --font-display:"Playfair Display", Georgia, "Times New Roman", serif;
+      --font-text:"Nunito", system-ui, Arial, sans-serif;
     }
 
     *{box-sizing:border-box}
@@ -60,20 +70,21 @@
     section{scroll-margin-top:calc(var(--header-h) + 16px)}
 
     /* progress + header */
-    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--a1);width:0;z-index:60;box-shadow:0 0 12px #42d6ffaa}
-    header{position:sticky;top:0;z-index:30;height:var(--header-h);display:flex;align-items:center;background:rgba(25,27,55,.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #ffffff12}
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--a1);width:0;z-index:60;box-shadow:0 0 10px #ffb0d666}
+    header{position:sticky;top:0;z-index:30;height:var(--header-h);display:flex;align-items:center;background:rgba(30,25,50,.78);border-bottom:1px solid #ffffff14}
+    @supports (backdrop-filter: blur(6px)){ header{backdrop-filter:blur(6px)} }
     .head-inner{display:flex;align-items:center;justify-content:space-between;width:100%;gap:14px;padding:10px 5vw}
-    .logo-img{height:46px;background:#fff;border-radius:14px;padding:2px 8px;box-shadow:0 0 18px #42d6ff38;object-fit:contain}
+    .logo-img{height:46px;background:#fff;border-radius:14px;padding:2px 8px;box-shadow:0 0 14px #ffffff33;object-fit:contain}
     nav{display:flex;gap:1.1rem;flex-wrap:wrap}
-    nav a{font-weight:700;opacity:.95;position:relative;padding:6px 0}
+    nav a{font-weight:800;letter-spacing:.01em;opacity:.95;position:relative;padding:6px 0}
     nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--a2);transition:width .2s}
-    nav a:hover{color:var(--a1);text-shadow:0 0 10px #42d6ff66}
+    nav a:hover{color:var(--a2)}
     nav a:hover::after{width:100%}
-    .burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid #ffffff22;border-radius:10px;background:#ffffff12}
+    .burger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid #ffffff22;border-radius:10px;background:#ffffff10}
     .burger span{width:18px;height:2px;background:#fff;border-radius:2px;transition:.2s}
     @media (max-width:900px){
       .burger{display:flex}
-      nav{position:absolute;left:0;right:0;top:var(--header-h);background:rgba(23,25,55,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:12px 5vw;display:none;flex-direction:column;border-bottom:1px solid #ffffff12}
+      nav{position:absolute;left:0;right:0;top:var(--header-h);background:rgba(30,25,50,.96);padding:12px 5vw;display:none;flex-direction:column;border-bottom:1px solid #ffffff12}
       nav.show{display:flex}
       .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
       .burger.active span:nth-child(2){opacity:0}
@@ -85,35 +96,34 @@
       position:relative;min-height:clamp(560px,82vh,920px);
       display:grid;align-items:center;justify-items:start;overflow:hidden;
       background-image:
-        linear-gradient(90deg,rgba(12,15,45,.88) 0%,rgba(12,15,45,.72) 36%,rgba(12,15,45,.28) 56%,rgba(12,15,45,0) 76%),
+        linear-gradient(90deg,rgba(22,18,40,.86) 0%,rgba(22,18,40,.65) 40%,rgba(22,18,40,.20) 60%,rgba(22,18,40,0) 75%),
         var(--hero-img);
-      background-size:cover;background-position:right center;text-align:left;
-      isolation:isolate;
+      background-size:cover;background-position:var(--hero-pos);
+      text-align:left;isolation:isolate;
     }
     .hero::after{
-      content:"";position:absolute;left:0;right:0;bottom:-1px;height:160px;z-index:0;pointer-events:none;
-      background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.75) 70%, rgba(12,15,45,1) 100%);
+      content:"";position:absolute;left:0;right:0;bottom:-1px;height:140px;z-index:0;pointer-events:none;
+      background:linear-gradient(to bottom, rgba(22,18,40,0) 0%, rgba(22,18,40,.88) 70%, rgba(22,18,40,1) 100%);
     }
-    .hero-inner{position:relative;z-index:1;width:min(900px,92vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;padding:clamp(84px,10vw,120px) 18px 42px}
-    .hero h1{margin:0 0 10px;font-size:clamp(42px,10vw,110px);font-weight:800;font-family:var(--font-display);letter-spacing:.02em;line-height:.95;text-transform:uppercase;color:#fff;text-shadow:0 0 6px var(--gl3),0 0 14px var(--gl1),0 0 28px var(--gl1),0 0 48px var(--gl2)}
-    .hero-title span{display:block}
-    .hero p{margin:12px 0 0;max-width:820px;font-size:clamp(18px,2.6vw,28px);line-height:1.3}
-    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:16px;padding:14px 20px;color:#fff;font-weight:800;box-shadow:0 8px 22px #42d6ff2a,0 0 30px #42d6ff22 inset;transition:transform .16s,background .18s,box-shadow .18s}
+    .hero-inner{position:relative;z-index:1;width:min(900px,92vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;padding:clamp(72px,10vw,120px) 18px 40px}
+    .hero h1{margin:0 0 10px;font-size:clamp(38px,9.5vw,92px);font-weight:700;font-family:var(--font-display);line-height:.95;letter-spacing:.01em;
+      text-shadow:0 2px 0 rgba(0,0,0,.3), 0 0 14px #ffb0d622;}
+    .hero p{margin:12px 0 0;max-width:820px;font-size:clamp(17px,2.2vw,24px);line-height:1.35}
+
+    .cta{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:16px;padding:14px 20px;color:#fff;font-weight:800;box-shadow:0 8px 20px #00000022,0 0 14px #ffffff14 inset;transition:transform .16s,background .18s}
     .cta:hover{transform:translateY(-2px);background:var(--btn2)}
     .cta--ghost{background:transparent;border:1px solid #ffffff55;border-radius:14px;padding:12px 18px}
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start;margin-top:18px}
 
     /* ===== Плавные секции ===== */
     .section-bg{
-      --bg-img:none; position:relative; overflow:hidden; background-color:#0c0f2d;
-      background-image:linear-gradient(180deg, rgba(12,15,45,.85) 0%, rgba(12,15,45,.92) 40%, rgba(12,15,45,.88) 100%), var(--bg-img);
-      background-size:cover;background-position:center;background-repeat:no-repeat;
-      isolation:isolate;
+      --bg-img:none; position:relative; overflow:hidden; background-color:#1a1430;
+      background-image:linear-gradient(180deg, rgba(24,18,40,.85) 0%, rgba(24,18,40,.92) 40%, rgba(24,18,40,.88) 100%), var(--bg-img);
+      background-size:cover;background-position:center;background-repeat:no-repeat;isolation:isolate;
     }
-    .section-bg::before{content:""; position:absolute; left:0; right:0; top:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to top, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
-    .section-bg::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
+    .section-bg::before{content:""; position:absolute; left:0; right:0; top:-1px; height:120px; z-index:0; pointer-events:none;background:linear-gradient(to top, rgba(24,18,40,0) 0%, rgba(24,18,40,.92) 100%)}
+    .section-bg::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:120px; z-index:0; pointer-events:none;background:linear-gradient(to bottom, rgba(24,18,40,0) 0%, rgba(24,18,40,.92) 100%)}
 
-    /* оставляем фоны — если нет файлов, просто будет градиент */
     .bg-services  {--bg-img:url('png/bg-abonements.png')}
     .bg-reviews   {--bg-img:url('png/bg-reviews.png')}
     .bg-results   {--bg-img:url('png/bg-results.png')}
@@ -124,101 +134,87 @@
       position:relative;overflow:hidden;isolation:isolate;
       min-height:clamp(520px,74vh,860px);
       background-image:
-        linear-gradient(90deg, rgba(12,15,45,.88) 0%, rgba(12,15,45,.60) 40%, rgba(12,15,45,0) 76%),
+        linear-gradient(90deg, rgba(22,18,40,.88) 0%, rgba(22,18,40,.62) 40%, rgba(22,18,40,0) 76%),
         var(--about-img);
-      background-size:cover;
-      background-position:right center;
-    }
-    .about-hero__photo{display:none}
-    .about-hero::after{
-      content:"";position:absolute;left:0;right:0;bottom:-1px;height:150px;pointer-events:none;z-index:1;
-      background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.78) 70%, rgba(12,15,45,1) 100%);
+      background-size:cover;background-position:var(--about-pos);
     }
     .about-hero__overlay{position:absolute;inset:0;display:grid;align-items:center;justify-items:start;z-index:2}
     .about-hero__card{
-      width:min(760px,92vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;
-      background:rgba(22,26,54,.72);border:1px solid #ffffff33;border-radius:20px;
-      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-      box-shadow:0 14px 38px #00000050, 0 0 60px #42d6ff22 inset;
-      padding:clamp(14px,2.2vw,24px) clamp(16px,3vw,28px);
-      color:#f4f7ff;text-align:center;text-shadow:0 1px 12px rgba(0,0,0,.65);
+      width:min(820px,94vw);margin-left:clamp(16px,6vw,96px);margin-right:auto;
+      background:rgba(40,35,70,.78);border:1px solid #ffffff22;border-radius:20px;
+      padding:clamp(16px,2.2vw,24px) clamp(18px,3vw,28px);
+      color:#f4f7ff;text-align:center;box-shadow:var(--shadow)
     }
-    .about-hero__card h2{margin:0 0 10px}
-    .about-hero__card p{margin:0;line-height:1.25;font-size:clamp(18px,2.2vw,28px)}
+    .about-hero__card h2{margin:0 0 12px;font-family:var(--font-display);font-size:clamp(26px,4.2vw,40px)}
+    .about-hero__card p{margin:0;line-height:1.35;font-size:clamp(18px,2.2vw,26px)}
     @media (max-width:900px){
-      .about-hero{background-position:72% center}
+      .about-hero{background-position:70% center} /* на телефоне сильнее сдвигаем, чтобы лицо было в кадре */
       .about-hero__overlay{align-items:flex-start}
-      .about-hero__card{width:calc(100% - 24px);margin:10vw auto 0 12px;border-radius:16px;padding:14px 14px 16px}
+      .about-hero__card{width:calc(100% - 20px);margin:10vw auto 0 10px;border-radius:16px;padding:14px 14px 16px}
     }
 
-    .block{max-width:var(--max);margin:36px auto;padding:34px 18px;background:var(--panel);border-radius:var(--rad);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center;position:relative;z-index:1}
-    .block h2,.block h3{font-family:var(--font-display);letter-spacing:.02em;text-transform:uppercase;font-size:clamp(28px,5vw,44px);margin:0 0 14px;background:linear-gradient(90deg,#42d6ff 0%,#b399ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px #42d6ff42, 0 0 20px #b399ff35}
-    .meta{color:#9edcff;font-size:16px;font-weight:700;margin-bottom:8px;text-shadow:0 0 8px #42d6ff70}
-    .caption{margin-top:10px;color:var(--a2);font-weight:700;text-shadow:0 0 8px #b399ff66}
+    .block{max-width:var(--max);margin:34px auto;padding:30px 18px;background:var(--panel);border-radius:var(--rad);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center;position:relative;z-index:1}
+    .block h2,.block h3{font-family:var(--font-display);letter-spacing:.01em;text-transform:none;font-size:clamp(26px,4.8vw,40px);margin:0 0 12px;background:linear-gradient(90deg,#9ec8ff 0%,#ffb0d6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .meta{color:#c8deff;font-size:15px;font-weight:800;margin-bottom:8px}
+    .caption{margin-top:10px;color:#ffcae6;font-weight:800}
 
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:14px}
-    .card{background:var(--glass);border:1.3px solid var(--line);border-radius:18px;box-shadow:0 8px 24px #00000018;padding:16px 16px 18px;text-align:left;transition:transform .18s, box-shadow .2s}
-    .card:hover{transform:translateY(-4px);box-shadow:0 18px 42px #00000028}
-    .card h3{margin:0 0 6px;font-size:22px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.02em}
-    .sub{opacity:.9;margin-bottom:8px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
+    .card{background:var(--glass);border:1.2px solid var(--line);border-radius:18px;box-shadow:0 6px 18px #00000018;padding:16px;text-align:left;transition:transform .16s}
+    .card:hover{transform:translateY(-3px)}
+    .card h3{margin:0 0 6px;font-size:22px;font-family:var(--font-display)}
+    .sub{opacity:.95;margin-bottom:8px}
     .card ul{margin:8px 0 10px 0;padding-left:0;list-style:none}
     .card li{margin:6px 0}
     .price-line{display:grid;grid-template-columns:1fr auto;column-gap:10px;align-items:baseline;white-space:nowrap;overflow:hidden}
     .price-line .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .price-line .price{white-space:nowrap}
-    .card-img{width:100%;height:auto;margin-top:12px;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 22px #00000022}
 
-    .notice{margin-top:16px;padding:12px 14px;border-radius:12px;background:rgba(66,214,255,.08);border:1px solid #42d6ff33;color:#cfefff;font-weight:700;text-align:center;box-shadow:0 6px 18px #00000018 inset}
-
-    .more-btn{margin-top:8px;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #9edcff66;color:#e9f6ff;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;transition:.18s}
-    .more-btn:hover{transform:translateY(-1px);background:#ffffff12}
-    .desc{margin-top:12px;padding:14px;border-radius:14px;background:linear-gradient(180deg, rgba(66,214,255,.10), rgba(179,153,255,.10));border:1px solid #8ecbff33;box-shadow:0 8px 28px #00000022 inset, 0 0 30px #42d6ff15;display:none}
-    .desc.show{display:block}
-    [hidden]{display:none !important;}
-    .desc .ribbon{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#42d6ff,#b399ff);color:#0e1438;box-shadow:0 6px 20px #42d6ff55;margin-bottom:8px}
-    .desc p{margin:6px 0 8px;line-height:1.35}
-    .desc ul{margin:8px 0 8px 0;padding:0 0 0 20px}
-    .desc li{margin:6px 0}
-    .desc small{display:block;color:#bcdcff;opacity:.95;margin-top:6px}
-
-    .videowrap{max-width:860px;margin:28px auto 8px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 10px 30px #00000022}
+    .videowrap{max-width:860px;margin:24px auto 8px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 8px 22px #00000018}
     .video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
     .video-frame video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
 
     .block--full{max-width:none;width:100vw;margin-left:50%;transform:translateX(-50%);border-radius:0}
-    .reviews-slider{position:relative;margin-top:16px}
-    .reviews-viewport{-webkit-mask-image:linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);mask-image:linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);overflow:hidden}
-    .reviews-track{display:flex;gap:18px;align-items:center;padding:10px 8vw;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
-    .review-slide{flex:0 0 60vw;max-width:740px;height:clamp(360px, 56vh, 560px);background:var(--glass);border:1.3px solid var(--line);border-radius:16px;padding:10px;box-shadow:0 8px 24px #00000030;opacity:.75;transform:scale(.96);transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease;display:flex;align-items:center;justify-content:center}
-    .review-slide.is-active{opacity:1;transform:scale(.985);box-shadow:0 16px 46px #00000045}
+    .reviews-slider{position:relative;margin-top:12px}
+    .reviews-viewport{overflow:hidden;touch-action:pan-y}
+    .reviews-track{display:flex;gap:14px;align-items:center;padding:10px 8vw;transition:transform .35s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .review-slide{flex:0 0 62vw;max-width:740px;height:clamp(320px, 52vh, 540px);background:var(--glass);border:1.2px solid var(--line);border-radius:16px;padding:10px;box-shadow:0 8px 22px #00000022;opacity:.9;transform:scale(.98);transition:transform .28s ease, opacity .28s ease}
+    .review-slide.is-active{opacity:1;transform:scale(1)}
     .review-slide img{width:100%;height:100%;object-fit:contain;border-radius:12px;display:block;background:#0b0f2c}
-    .reviews-arrow{position:absolute;top:50%;transform:translateY(calc(-50%));width:48px;height:48px;border-radius:999px;border:1px solid #ffffff77;background:#0f1437a6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 28px #000a;z-index:3}
-    .reviews-arrow:hover{transform:translateY(calc(-50%)) scale(1.05)}
+    .reviews-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:999px;border:1px solid #ffffff66;background:#20193ea6;display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px #000a;z-index:3}
+    .reviews-arrow:hover{transform:translateY(-50%) scale(1.05)}
     .reviews-arrow svg{width:20px;height:20px;fill:#fff}
     .reviews-arrow[data-prev]{left:10px}
     .reviews-arrow[data-next]{right:10px}
     @media (max-width:720px){
+      .hero{background-position:68% center}
+      .hero h1{font-size:clamp(34px,9vw,68px);text-shadow:0 1px 0 rgba(0,0,0,.25), 0 0 8px #ffb0d61f} /* меньше сияния на телефоне */
       .reviews-track{padding:8px 5vw}
-      .review-slide{flex:0 0 86vw;height:clamp(320px, 52vh, 520px)}
-      .reviews-arrow{width:56px;height:56px}
+      .review-slide{flex:0 0 86vw;height:clamp(280px, 50vh, 520px)}
+      .reviews-arrow{width:54px;height:54px}
       .reviews-arrow svg{width:22px;height:22px}
     }
 
     .btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:14px;padding:12px 16px;color:#fff;font-weight:800;box-shadow:0 8px 22px #42d6ff2a,0 0 30px #42d6ff22 inset;transition:transform .16s,background .18s,box-shadow .18s}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--btn);border:0;border-radius:14px;padding:12px 16px;color:#fff;font-weight:800;box-shadow:0 8px 20px #00000022,0 0 12px #ffffff14 inset;transition:transform .16s,background .18s}
     .btn:hover{transform:translateY(-2px);background:var(--btn2)}
     .btn--ghost{background:transparent;border:1px solid #ffffff55}
-    footer{margin-top:40px;padding:calc(24px + env(safe-area-inset-bottom,0)) 5vw 24px;background:rgba(25,27,55,.85);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);border-top:1px solid #ffffff12}
+    footer{margin-top:36px;padding:calc(22px + env(safe-area-inset-bottom,0)) 5vw 22px;background:rgba(30,25,50,.86);border-top:1px solid #ffffff12}
     .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .fsocial{display:flex;gap:10px}
 
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1), transform .5s cubic-bezier(.22,.61,.36,1)}
     .reveal.show{opacity:1;transform:none}
 
-    .sticky-cta{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0));z-index:50;display:none;justify-content:center;align-items:center;padding:14px 18px;border-radius:999px;background:var(--btn);color:#fff;font-weight:800;text-align:center;box-shadow:0 12px 36px #00000044, 0 0 36px #42d6ff55 inset;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+    .sticky-cta{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0));z-index:50;display:none;justify-content:center;align-items:center;padding:14px 18px;border-radius:999px;background:var(--btn);color:#fff;font-weight:800;text-align:center;box-shadow:0 12px 30px #00000036}
     .sticky-cta.show{display:flex}
-    @media (min-width:901px){.sticky-cta{display:none !重要}}
-    :focus-visible{outline:3px solid #42d6ff;outline-offset:3px;border-radius:10px}
+    @media (min-width:901px){.sticky-cta{display:none !important}}
+    :focus-visible{outline:3px solid #9ec8ff;outline-offset:3px;border-radius:10px}
+
+    /* Меньше «движухи», если пользователь просит */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+      .reviews-track{transition:none}
+    }
   </style>
 
   <script type="application/ld+json">
@@ -261,7 +257,6 @@
 
 <!-- ABOUT -->
 <section id="about" class="about-hero section-bg reveal" aria-label="Об астрологе">
-  <div class="about-hero__photo" aria-hidden="true"></div>
   <div class="about-hero__overlay">
     <div class="about-hero__card">
       <h2>Обо мне</h2>
@@ -277,25 +272,24 @@
 <!-- SERVICES -->
 <section id="services" class="section-bg bg-services reveal">
   <div class="container">
-    <div class="block" style="background:rgba(20,22,48,.86)">
+    <div class="block" style="background:rgba(40,35,70,.86)">
       <h2>Услуги и стоимость</h2>
 
       <div class="cards">
         <div class="card">
           <div class="meta">Главная консультация</div>
           <h3>🔮 Разбор натальной карты</h3>
-          <div class="sub">Личная встреча онлайн (до 80 минут) + рекомендации и ответы на ваши вопросы</div>
-          <ul>
-            <li class="price-line"><span class="label">Стоимость</span><span class="price"><b>7 990₽</b></span></li>
-          </ul>
+          <div class="sub">Онлайн-встреча до 80 минут + рекомендации и ответы на вопросы</div>
+          <ul><li class="price-line"><span class="label">Стоимость</span><span class="price"><b>7 990₽</b></span></li></ul>
+
           <button class="more-btn" type="button" data-toggle="#desc-natal" aria-controls="desc-natal" aria-expanded="false">Подробнее об услуге</button>
           <div class="desc" id="desc-natal" aria-label="Описание услуги" hidden>
             <span class="ribbon">Что входит</span>
             <ul>
               <li>Подготовка карты по дате, времени и месту рождения</li>
-              <li>Разбор ключевых сфер: предназначение, сильные и слабые стороны, финансы, отношения</li>
+              <li>Разбор предназначения, сильных и слабых сторон, финансов и отношений</li>
               <li>Рекомендации по периодам и ближайшим возможностям</li>
-              <li>Ответы на ваши вопросы в конце встречи</li>
+              <li>Ответы на ваши вопросы</li>
               <li>Запись консультации и конспект основных выводов</li>
             </ul>
             <small>Связь для записи: <a href="https://t.me/astroleonida" target="_blank" rel="noopener">t.me/astroleonida</a> или <a href="https://t.me/leonidochka83" target="_blank" rel="noopener">@leonidochka83</a>.</small>
@@ -315,7 +309,7 @@
         </div>
       </div>
 
-      <div class="cta-row" style="margin-top:22px;">
+      <div class="cta-row" style="margin-top:20px;">
         <a href="https://t.me/astroleonida" class="cta cta--main" target="_blank" rel="noopener" data-keep-utm="true">Записаться</a>
         <a href="https://t.me/leonidochka83" class="cta cta--ghost" target="_blank" rel="noopener" data-keep-utm="true">Написать в Telegram</a>
       </div>
@@ -326,19 +320,21 @@
 <!-- REVIEWS -->
 <section id="reviews" class="section-bg bg-reviews reveal">
   <div class="container">
-    <div class="block block--full" style="background:rgba(20,22,48,.86)">
+    <div class="block block--full" style="background:rgba(40,35,70,.86)">
       <h2>Отзывы клиентов</h2>
 
-      <div class="reviews-slider" id="reviewsSlider" aria-label="Слайдер отзывов">
+      <!-- Положите фото-отзывы в папку: png/reviews/
+           Название файлов: leonida-review-1.jpg, leonida-review-2.jpg, leonida-review-3.jpg ... -->
+      <div class="reviews-slider" id="reviewsSlider" aria-label="Слайдер отзывов" aria-live="polite">
         <button class="reviews-arrow" data-prev aria-label="Предыдущий отзыв">
           <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </button>
 
         <div class="reviews-viewport">
           <div class="reviews-track">
-            <div class="review-slide is-active"><img src="png/reviews/1.png" alt="Отзыв 1" loading="lazy" decoding="async"></div>
-            <div class="review-slide"><img src="png/reviews/2.png" alt="Отзыв 2" loading="lazy" decoding="async"></div>
-            <div class="review-slide"><img src="png/reviews/3.png" alt="Отзыв 3" loading="lazy" decoding="async"></div>
+            <div class="review-slide is-active"><img src="png/reviews/leonida-review-1.jpg" alt="Отзыв клиента 1" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="png/reviews/leonida-review-2.jpg" alt="Отзыв клиента 2" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="png/reviews/leonida-review-3.jpg" alt="Отзыв клиента 3" loading="lazy" decoding="async"></div>
           </div>
         </div>
 
@@ -353,7 +349,7 @@
 <!-- RESULTS -->
 <section id="results" class="section-bg bg-results reveal">
   <div class="container">
-    <div class="block" style="background:rgba(20,22,48,.86)">
+    <div class="block" style="background:rgba(40,35,70,.86)">
       <h2>Результаты и кейсы</h2>
       <figure class="videowrap">
         <div class="video-frame">
@@ -368,7 +364,7 @@
 <!-- CONTACTS -->
 <section id="contacts" class="section-bg bg-contacts reveal">
   <div class="container">
-    <div class="block" style="background:rgba(20,22,48,.86)">
+    <div class="block" style="background:rgba(40,35,70,.86)">
       <h2>Контакты</h2>
       <div class="btn-row" style="margin-bottom:10px;">
         <a class="btn" href="https://t.me/astroleonida" target="_blank" rel="noopener" data-keep-utm="true">
@@ -418,16 +414,22 @@
   const scta = document.getElementById('stickyCta'); let sShown=false;
   window.addEventListener('scroll',()=>{ if(!sShown && scrollY>240){ scta.classList.add('show'); sShown=true; } }, {passive:true});
 
-  // Прогресс-бар
+  // Прогресс-бар (throttle)
   const progressBar = document.getElementById('scrollProgress');
+  let ticking=false;
   function onScrollProgress(){
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-    progressBar.style.width = (scrolled * 100) + '%';
+    if(ticking) return;
+    ticking=true;
+    requestAnimationFrame(()=>{
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+      progressBar.style.width = (scrolled * 100) + '%';
+      ticking=false;
+    });
   }
   document.addEventListener('scroll', onScrollProgress, {passive:true}); onScrollProgress();
 
-  // Слайдер отзывов
+  // Слайдер отзывов: устойчивый на телефоне
   (function(){
     const slider = document.getElementById('reviewsSlider'); if(!slider) return;
     const track = slider.querySelector('.reviews-track');
@@ -441,7 +443,7 @@
       const left = slide.offsetLeft + slide.offsetWidth/2;
       const center = viewport.clientWidth/2;
       const translate = center - left;
-      track.style.transform = `translateX(${translate}px)`;
+      track.style.transform = `translate3d(${translate}px,0,0)`;
       setActive(index);
     }
     function prev(){ index = (index-1+slides.length)%slides.length; update(); }
@@ -451,10 +453,14 @@
     slider.querySelector('[data-next]').addEventListener('click', next);
 
     // свайп
-    let startX=0, dx=0, touching=false;
-    viewport.addEventListener('pointerdown', (e)=>{ touching=true; startX=e.clientX; viewport.setPointerCapture(e.pointerId); });
-    viewport.addEventListener('pointerup', ()=>{ if(!touching) return; touching=false; if(Math.abs(dx)>40){ dx>0 ? prev() : next(); } dx=0; });
+    let startX=0, dx=0, touching=false, pid=null;
+    viewport.addEventListener('pointerdown', (e)=>{ touching=true; startX=e.clientX; viewport.setPointerCapture(e.pointerId); pid=e.pointerId; });
+    viewport.addEventListener('pointerup', (e)=>{ if(!touching || (pid!==e.pointerId)) return; touching=false; if(Math.abs(dx)>40){ dx>0 ? prev() : next(); } dx=0; pid=null; });
+    viewport.addEventListener('pointercancel', ()=>{ touching=false; dx=0; pid=null; });
     viewport.addEventListener('pointermove', (e)=>{ if(!touching) return; dx=e.clientX-startX; });
+
+    // клавиатура
+    slider.addEventListener('keydown',(e)=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
     window.addEventListener('resize', update, {passive:true});
     requestAnimationFrame(update);
