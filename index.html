@@ -13,10 +13,11 @@
   <meta property="og:site_name" content="Леонида">
   <meta property="og:title" content="Леонида — Ведическая астрология">
   <meta property="og:description" content="Разбор натальной карты и персональные рекомендации.">
-  <meta property="og:image" content="/png/leonida1.jpg">
-  <meta property="og:url" content="https://leonida.example/">
+  <!-- После публикации можно заменить на абсолютный URL страницы -->
+  <meta property="og:image" content="png/leonida1.jpg">
+  <meta property="og:url" content="./">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://leonida.example/">
+  <link rel="canonical" href="./">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -25,14 +26,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;700&display=swap"></noscript>
 
-  <!-- Icons / PWA -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="manifest" href="/manifest.webmanifest">
-
   <!-- Preloads -->
-  <link rel="preload" as="image" href="/png/leonida1.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
-  <link rel="preload" as="image" href="/png/leonida2.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
-  <link rel="preload" as="image" href="/логотип_белый.png">
+  <link rel="preload" as="image" href="png/leonida1.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
+  <link rel="preload" as="image" href="png/leonida2.jpg" imagesizes="(max-width:900px) 100vw, 1920px">
+  <link rel="preload" as="image" href="логотип_белый.png">
 
   <style>
     :root{
@@ -48,9 +45,9 @@
       --max:1120px; --header-h:68px;
       --gl1:#42d6ff; --gl2:#b399ff; --gl3:#8ad9ff;
 
-      /* фото: замените файлы в /png/ */
-      --hero-img:  url('/png/leonida1.jpg'); /* первый раздел фото */
-      --about-img: url('/png/leonida2.jpg');  /* второй раздел фото */
+      /* фото: берём из /png внутри репозитория (без ведущего слэша!) */
+      --hero-img:  url('png/leonida1.jpg'); /* первый раздел фото (leonida1) */
+      --about-img: url('png/leonida2.jpg');  /* второй раздел фото (leonida2) */
 
       --font-display:"Bebas Neue","Oswald",system-ui,Arial,sans-serif;
       --font-text:"Oswald","Bebas Neue",system-ui,Arial,sans-serif;
@@ -116,10 +113,11 @@
     .section-bg::before{content:""; position:absolute; left:0; right:0; top:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to top, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
     .section-bg::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:140px; z-index:0; pointer-events:none;background:linear-gradient(to bottom, rgba(12,15,45,0) 0%, rgba(12,15,45,.86) 100%)}
 
-    .bg-services  {--bg-img:url('/png/bg-abonements.png')}
-    .bg-reviews   {--bg-img:url('/png/bg-reviews.png')}
-    .bg-results   {--bg-img:url('/png/bg-results.png')}
-    .bg-contacts  {--bg-img:url('/png/bg-contacts.png')}
+    /* оставляем фоны — если нет файлов, просто будет градиент */
+    .bg-services  {--bg-img:url('png/bg-abonements.png')}
+    .bg-reviews   {--bg-img:url('png/bg-reviews.png')}
+    .bg-results   {--bg-img:url('png/bg-results.png')}
+    .bg-contacts  {--bg-img:url('png/bg-contacts.png')}
 
     /* ===== ОБ АСТРОЛОГЕ ===== */
     .about-hero{
@@ -153,7 +151,6 @@
       .about-hero__card{width:calc(100% - 24px);margin:10vw auto 0 12px;border-radius:16px;padding:14px 14px 16px}
     }
 
-    /* Карточки и прочее */
     .block{max-width:var(--max);margin:36px auto;padding:34px 18px;background:var(--panel);border-radius:var(--rad);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center;position:relative;z-index:1}
     .block h2,.block h3{font-family:var(--font-display);letter-spacing:.02em;text-transform:uppercase;font-size:clamp(28px,5vw,44px);margin:0 0 14px;background:linear-gradient(90deg,#42d6ff 0%,#b399ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px #42d6ff42, 0 0 20px #b399ff35}
     .meta{color:#9edcff;font-size:16px;font-weight:700;margin-bottom:8px;text-shadow:0 0 8px #42d6ff70}
@@ -220,12 +217,12 @@
 
     .sticky-cta{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0));z-index:50;display:none;justify-content:center;align-items:center;padding:14px 18px;border-radius:999px;background:var(--btn);color:#fff;font-weight:800;text-align:center;box-shadow:0 12px 36px #00000044, 0 0 36px #42d6ff55 inset;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
     .sticky-cta.show{display:flex}
-    @media (min-width:901px){.sticky-cta{display:none !important}}
+    @media (min-width:901px){.sticky-cta{display:none !重要}}
     :focus-visible{outline:3px solid #42d6ff;outline-offset:3px;border-radius:10px}
   </style>
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Леонида","jobTitle":"Ведический астролог","url":"https://leonida.example/","sameAs":["https://t.me/astroleonida","https://t.me/leonidochka83"],"image":"/png/leonida1.jpg"}
+  {"@context":"https://schema.org","@type":"Person","name":"Леонида","jobTitle":"Ведический астролог","url":"./","sameAs":["https://t.me/astroleonida","https://t.me/leonidochka83"],"image":"png/leonida1.jpg"}
   </script>
 </head>
 <body>
@@ -339,9 +336,9 @@
 
         <div class="reviews-viewport">
           <div class="reviews-track">
-            <div class="review-slide is-active"><img src="/png/reviews/1.png" alt="Отзыв 1" loading="lazy" decoding="async"></div>
-            <div class="review-slide"><img src="/png/reviews/2.png" alt="Отзыв 2" loading="lazy" decoding="async"></div>
-            <div class="review-slide"><img src="/png/reviews/3.png" alt="Отзыв 3" loading="lazy" decoding="async"></div>
+            <div class="review-slide is-active"><img src="png/reviews/1.png" alt="Отзыв 1" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="png/reviews/2.png" alt="Отзыв 2" loading="lazy" decoding="async"></div>
+            <div class="review-slide"><img src="png/reviews/3.png" alt="Отзыв 3" loading="lazy" decoding="async"></div>
           </div>
         </div>
 
@@ -482,7 +479,7 @@
     });
   })();
 
-  // Тогглер описаний (надёжная версия с делегированием и hidden)
+  // Тогглер описаний
   document.addEventListener('click', (e)=>{
     const btn = e.target.closest('.more-btn');
     if(!btn) return;
